@@ -10,7 +10,7 @@ let medicos = JSON.parse(localStorage.getItem("medicos")) || [
     nombre: "Dra. María López",
     especialidad: "Pediatría",
     horarios: "Martes y Jueves 14-18",
-    foto: "assets/img/medica.png",
+    foto: "blob/main/assets/img/medica.png",
   },
   {
     nombre: "Dr. Carlos Gómez",
