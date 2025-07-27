@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <header class="encabezado-dos">
+      <img src="./assets/img/Imagen 1.png" alt="logo" width="70px" />
+      <h1 class="titulo-header">Consultorios Lavalle</h1>
+    </header>
+
+    <main>
+      <section class="profesionales2">
+        <h1>Nuestros Staff</h1>
+        <div class="contenedor-medicos">
+          <article class="flecha">
+            <img src="./assets/img/left.png" alt="imagen flecha" />
+          </article>
+          <article class="medicos">
+            <img src="./assets/img/medico.png" alt="fotomedico" />
+            <p>
+              Nombre Apellido <br />
+              Especialidad
+            </p>
+          </article>
+          <article class="medicos">
+            <img src="./assets/img/medico.png" alt="fotomedico" />
+            <p>
+              Nombre Apellido <br />
+              Especialidad
+            </p>
+          </article>
+          <article class="medicos">
+            <img src="./assets/img/medico.png" alt="fotomedico" />
+            <p>
+              Nombre Apellido <br />
+              Especialidad
+            </p>
+          </article>
+          <article class="medicos">
+            <img src="./assets/img/medico.png" alt="fotomedico" />
+            <p>
+              Nombre Apellido <br />
+              Especialidad
+            </p>
+          </article>
+          <article class="flecha">
+            <img src="./assets/img/right.png" alt="imagen flecha" />
+          </article>
+        </div>
+      </section>
+      <section class="formularios-container">
+        <div class="formulario-medicos">
+          <h2>Agregar Médico</h2>
+          <form id="form-medico">
+            <label for="nombre-medico">Nombre:</label>
+            <input type="text" id="nombre-medico" name="nombre" required />
+
+            <label for="especialidad-medico">Especialidad:</label>
+            <input
+              type="text"
+              id="especialidad-medico"
+              name="especialidad"
+              required
+            />
+
+            <label for="horarios-medico">Horarios de Atención:</label>
+            <input
+              type="text"
+              id="horarios-medico"
+              name="horarios"
+              placeholder="Ej: Lunes a Viernes de 9 a 13"
+              required
+            />
+
+            <label for="foto-medico">Foto (URL):</label>
+            <input type="url" id="foto-medico" name="foto" />
+
+            <button type="submit">Agregar Médico</button>
+          </form>
+        </div>
+
+        <div class="formulario-pacientes">
+          <h2>Agregar Paciente</h2>
+          <form id="form-paciente">
+            <label for="nombre-paciente">Nombre:</label>
+            <input type="text" id="nombre-paciente" name="nombre" required />
+
+            <label for="email-paciente">Email:</label>
+            <input type="email" id="email-paciente" name="email" required />
+
+            <label for="obra-social">Obra Social:</label>
+            <input type="text" id="obra-social" name="obraSocial" />
+
+            <button type="submit">Registrar Paciente</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="formulario-turnos">
+        <h2>Tomar Turno</h2>
+        <form id="form-turno">
+          <label for="paciente-turno">Paciente:</label>
+          <select id="paciente-turno" name="paciente" required>
+            <option value="">Seleccionar paciente</option>
+            <!-- opciones dinámicas con JS -->
+          </select>
+
+          <label for="medico-turno">Médico:</label>
+          <select id="medico-turno" name="medico" required>
+            <option value="">Seleccionar médico</option>
+            <!-- opciones dinámicas con JS -->
+          </select>
+
+          <label for="fecha-turno">Fecha:</label>
+          <input type="date" id="fecha-turno" name="fecha" required />
+
+          <label for="hora-turno">Hora:</label>
+          <input type="time" id="hora-turno" name="hora" required />
+
+          <button type="submit">Confirmar Turno</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>@ConsulltoriosLavalle2025</p>
+    </footer>
+  </body>
+</html>

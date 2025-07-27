@@ -1,0 +1,262 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Header */
+.encabezado-dos {
+  background-color: #2d8a8a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  flex-wrap: wrap;
+}
+
+.encabezado-dos img {
+  max-height: 60px;
+}
+
+.titulo-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Profesionales */
+.profesionales2 {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.profesionales2 h1 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2d8a8a;
+}
+
+/* Carrusel horizontal */
+.contenedor-medicos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Tarjetas de médicos con tamaño fijo */
+article.medicos {
+  width: 180px; /* ancho fijo */
+  height: 280px; /* alto fijo */
+  box-sizing: border-box;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  overflow: hidden; /* para que no crezca con contenido */
+}
+
+/* Imagenes con tamaño fijo y centradas */
+article.medicos img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover; /* recorta y adapta sin distorsionar */
+  border-radius: 50%;
+  margin-bottom: 15px;
+  flex-shrink: 0; /* no permite que la imagen reduzca su tamaño */
+}
+
+/* Texto debajo */
+article.medicos p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Flechas */
+article.flecha {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+article.flecha img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.flecha img:hover {
+  transform: scale(1.1);
+}
+
+/* Footer */
+footer {
+  background-color: #2d8a8a;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .encabezado-dos {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .titulo-header {
+    font-size: 1.5rem;
+  }
+
+  .contenedor-medicos {
+    gap: 10px;
+    padding: 20px 10px;
+  }
+
+  .medicos {
+    min-width: 140px;
+  }
+}
+
+.formularios-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  margin: 40px 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+.formulario-medicos,
+.formulario-pacientes {
+  flex: 1 1 350px;
+  max-width: 450px;
+  background-color: #e6f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px; /* fuerza una altura mínima igual */
+}
+.formulario-medicos h2,
+.formulario-pacientes h2 {
+  color: #2d8a8a;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form label {
+  font-weight: bold;
+  color: #333;
+}
+
+form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+form button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #2d8a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #236c6c;
+}
+
+.formulario-turnos {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #e6f2f2;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-turnos h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2d8a8a;
+}
+
+.formulario-turnos form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formulario-turnos label {
+  font-weight: bold;
+  color: #333;
+}
+
+.formulario-turnos input,
+.formulario-turnos select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.formulario-turnos button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #2d8a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-turnos button:hover {
+  background-color: #236c6c;
+}
