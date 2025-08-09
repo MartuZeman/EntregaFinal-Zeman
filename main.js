@@ -1,4 +1,5 @@
 //Variables
+
 let medicos = JSON.parse(localStorage.getItem("medicos")) || [
   {
     nombre: "Dr. Juan Pérez",
@@ -190,72 +191,4 @@ formularioPacientes.addEventListener("submit", (e) => {
   formularioPacientes.querySelector('input[name="nombre"]').value = "";
   formularioPacientes.querySelector('input[name="email"]').value = "";
   formularioPacientes.querySelector('input[name="obraSocial"]').value = "";
-});
-
-//Formulario Turno
-function cargarPacientesEnSelect() {
-  selectPaciente.innerHTML = '<option value="">Seleccionar paciente</option>';
-  pacientes.forEach((paciente, index) => {
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = paciente.nombre;
-    selectPaciente.appendChild(option);
-  });
-}
-
-function cargarMedicosEnSelect() {
-  selectMedico.innerHTML = '<option value="">Seleccionar médico</option>';
-  medicos.forEach((medico, index) => {
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = medico.nombre;
-    selectMedico.appendChild(option);
-  });
-}
-
-//Carga de pacientes y medicos en select
-cargarPacientesEnSelect();
-cargarMedicosEnSelect();
-
-//Funciones turnos
-function guardarTurnos() {
-  localStorage.setItem("turnos", JSON.stringify(turnos));
-}
-
-function crearTurno(pacienteIndex, medicoIndex, fecha, hora) {
-  return {
-    paciente: pacientes[pacienteIndex],
-    medico: medicos[medicoIndex],
-    fecha,
-    hora,
-  };
-}
-
-//Evento sumbit para formulario turnos
-formularioTurnos.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const pacienteIndex = formularioTurnos.querySelector(
-    'select[name="paciente"]'
-  ).value;
-  const medicoIndex = formularioTurnos.querySelector(
-    'select[name="medico"]'
-  ).value;
-  const fecha = formularioTurnos.querySelector('input[name="fecha"]').value;
-  const hora = formularioTurnos.querySelector('input[name="hora"]').value;
-
-  if (pacienteIndex === "" || medicoIndex === "" || !fecha || !hora) {
-    alert("Por favor, completá todos los campos para tomar el turno.");
-    return;
-  }
-
-  const turno = crearTurno(pacienteIndex, medicoIndex, fecha, hora);
-
-  turnos.push(turno);
-  guardarTurnos();
-
-  formularioTurnos.querySelector('select[name="paciente"]').value = "";
-  formularioTurnos.querySelector('select[name="medico"]').value = "";
-  formularioTurnos.querySelector('input[name="fecha"]').value = "";
-  formularioTurnos.querySelector('input[name="hora"]').value = "";
 });

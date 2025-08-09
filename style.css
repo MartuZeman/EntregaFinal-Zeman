@@ -157,8 +157,7 @@ form {
   flex-grow: 1;
   justify-content: space-around;
 }
-.formulario-medicos,
-.formulario-pacientes {
+.formulario-medicos{
   flex: 1 1 350px;
   max-width: 450px;
   background-color: #e6f2f2;
@@ -170,8 +169,7 @@ form {
   justify-content: space-between;
   min-height: 400px; /* fuerza una altura mínima igual */
 }
-.formulario-medicos h2,
-.formulario-pacientes h2 {
+.formulario-medicos h2{
   color: #2d8a8a;
   margin-bottom: 15px;
   text-align: center;
@@ -211,52 +209,3 @@ form button:hover {
   background-color: #236c6c;
 }
 
-.formulario-turnos {
-  max-width: 500px;
-  margin: 40px auto;
-  background-color: #e6f2f2;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.formulario-turnos h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2d8a8a;
-}
-
-.formulario-turnos form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.formulario-turnos label {
-  font-weight: bold;
-  color: #333;
-}
-
-.formulario-turnos input,
-.formulario-turnos select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.formulario-turnos button {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #2d8a8a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.formulario-turnos button:hover {
-  background-color: #236c6c;
-}
