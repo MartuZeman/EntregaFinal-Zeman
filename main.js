@@ -1,6 +1,7 @@
 //Variables
 
-let medicos = JSON.parse(localStorage.getItem("medicos")) || [
+
+let medicos = [
   {
     nombre: "Dr. Juan Pérez",
     especialidad: "Cardiología",
@@ -50,145 +51,97 @@ let medicos = JSON.parse(localStorage.getItem("medicos")) || [
     foto: "assets/img/medica3.png",
   },
 ];
+
 let indiceInicio = 0;
-let pacientes = JSON.parse(localStorage.getItem("pacientes")) || [];
-let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+let pacientes = [];
+let turnos = [];
 
 const contenedor = document.querySelector(".contenedor-medicos");
-const articulos = contenedor.querySelectorAll("article.medicos");
-const flechaIzquierda = contenedor.querySelector("article.flecha:first-of-type img");
-const flechaDerecha = contenedor.querySelector("article.flecha:last-of-type img");
+const articulos = document.querySelectorAll("article.medicos");
+const imagenesMedicos = document.querySelectorAll("article.medicos img");
+const textoMedicos = document.querySelectorAll("article.medicos p");
+const flechaIzquierda = document.getElementById("flecha-derecha");
+const flechaDerecha = document.getElementById("flecha-izquierda");
+const btnAgregarMedico = document.getElementById("BtnAgregarMedico")
 const formulario = document.querySelector(".formulario-medicos");
-const formularioPacientes = document.querySelector("#form-paciente");
-const selectPaciente = document.getElementById("paciente-turno");
-const selectMedico = document.getElementById("medico-turno");
-const formularioTurnos = document.getElementById("form-turno");
+const nombreMedico = document.getElementById("nombre-medico")
+const especialidadMedico = document.getElementById("especialidad-medico")
+const horariosMedico = document.getElementById("horarios-medico")
+const imgMedico = document.getElementById("foto-medico")
 
-//Funcion actualizar carrusel
-function renderizarCarrusel() {
-  for (let i = 0; i < articulos.length; i++) {
-    const indiceMedico = (indiceInicio + i) % medicos.length;
-    const medico = medicos[indiceMedico];
 
-    const img = articulos[i].querySelector("img");
-    if (img !== null) {
-      img.src = medico.foto;
-      img.alt = `Foto de ${medico.nombre}`;
-    }
+//Guardar medicos iniciales
 
-    const p = articulos[i].querySelector("p");
-    if (p !== null) {
-      p.innerHTML = `
-        <strong>${medico.nombre}</strong><br />
-        ${medico.especialidad}<br />
-        <em>${medico.horarios}</em>
-      `;
-    }
-  }
-}
-
-renderizarCarrusel();
-
-//Eventos flechas carrusel
-flechaDerecha.addEventListener("click", () => {
-  indiceInicio--;
-  if (indiceInicio < 0) {
-    indiceInicio = medicos.length - 1;
-  }
-  renderizarCarrusel();
-});
-
-flechaIzquierda.addEventListener("click", () => {
-  indiceInicio++;
-  if (indiceInicio >= medicos.length) {
-    indiceInicio = 0;
-  }
-  renderizarCarrusel();
-});
-
-//Formulario medicos
-function guardarMedicos() {
+if (localStorage.getItem("medicos")) {
+  medicos = JSON.parse(localStorage.getItem("medicos"));
+} else {
   localStorage.setItem("medicos", JSON.stringify(medicos));
 }
 
-function agregarMedico(nombre, especialidad, horarios, foto) {
-  const nuevoMedico = {
-    nombre,
-    especialidad,
-    horarios,
-    foto,
-  };
-
-  medicos.push(nuevoMedico);
-  guardarMedicos();
-  cargarMedicosEnSelect();
-  renderizarCarrusel();
+//Carrusel funcion actualizar imagenes
+function actualizarCarrusel() {
+  for (let i = 0; i < articulos.length; i += 1) {
+    const indiceMedico = (i + indiceInicio) % medicos.length;
+    let especialista =
+      medicos[indiceMedico].nombre +
+      "<br>" +
+      medicos[indiceMedico].especialidad +
+      "<br>" +
+      medicos[indiceMedico].horarios;
+    imagenesMedicos[i].src = medicos[indiceMedico].foto;
+    textoMedicos[i].innerHTML = especialista;
+  }
 }
-//Evento sumbit para formulario medicos
-formulario.addEventListener("submit", function (e) {
-  e.preventDefault();
 
-  const nombre = formulario.querySelector('input[name="nombre"]').value.trim();
-  const especialidad = formulario
-    .querySelector('input[name="especialidad"]')
-    .value.trim();
-  const horarios = formulario
-    .querySelector('input[name="horarios"]')
-    .value.trim();
-  const foto = formulario.querySelector('input[name="foto"]').value.trim();
+//actualizacion inicial con los primeros medicos
+actualizarCarrusel();
 
-  if (!nombre || !especialidad || !horarios || !foto) {
-    alert("Por favor, completá todos los campos.");
-    return;
+//Eventos para mover el carrusel
+flechaDerecha.addEventListener("click", () => {
+  indiceInicio = indiceInicio - 1;
+  if (indiceInicio < 0) {
+    indiceInicio = medicos.length - 1;
   }
 
-  agregarMedico(nombre, especialidad, horarios, foto);
-
-  formulario.querySelector('input[name="nombre"]').value = "";
-  formulario.querySelector('input[name="especialidad"]').value = "";
-  formulario.querySelector('input[name="horarios"]').value = "";
-  formulario.querySelector('input[name="foto"]').value = "";
+  actualizarCarrusel();
 });
 
-//Formulario Pacientes
-function guardarPacientes() {
-  localStorage.setItem("pacientes", JSON.stringify(pacientes));
-}
-
-function agregarPaciente(nombre, email, obraSocial) {
-  const nuevoPaciente = {
-    nombre,
-    email,
-    obraSocial,
-  };
-
-  pacientes.push(nuevoPaciente);
-  guardarPacientes();
-  cargarPacientesEnSelect();
-}
-
-// Evento submit para el formulario pacientes
-formularioPacientes.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const nombre = formularioPacientes
-    .querySelector('input[name="nombre"]')
-    .value.trim();
-  const email = formularioPacientes
-    .querySelector('input[name="email"]')
-    .value.trim();
-  const obraSocial = formularioPacientes
-    .querySelector('input[name="obraSocial"]')
-    .value.trim();
-
-  if (!nombre || !email) {
-    alert("Por favor, completá el nombre y el email.");
-    return;
+flechaIzquierda.addEventListener("click", () => {
+  indiceInicio = indiceInicio + 1;
+  if (indiceInicio >= medicos.length) {
+    indiceInicio = 0;
   }
-
-  agregarPaciente(nombre, email, obraSocial);
-
-  formularioPacientes.querySelector('input[name="nombre"]').value = "";
-  formularioPacientes.querySelector('input[name="email"]').value = "";
-  formularioPacientes.querySelector('input[name="obraSocial"]').value = "";
+  actualizarCarrusel();
 });
+
+function guardarMedicos (){
+
+    localStorage.setItem("medicos", JSON.stringify(medicos));
+}
+
+function nuevoMedico(n,e,h,img)
+{
+
+    this.nombre = n;
+    this.especialidad = e;
+    this.horarios = h;
+    this.foto = img;
+
+}
+
+formulario.addEventListener("submit", (evt) =>{
+    evt.preventDefault();
+
+    alert(medicos.length)
+    n = nombreMedico.value
+    e = especialidadMedico.value
+    h = horariosMedico.value
+    img = imgMedico.value
+
+    medicos.push(new nuevoMedico(n,e,h,img))
+
+    guardarMedicos()
+    actualizarCarrusel()
+
+})
+
