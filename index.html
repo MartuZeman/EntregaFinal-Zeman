@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="sweetalert2.min.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="sweetalert2.min.js"></script>
     <script src="main.js" defer></script>
   </head>
   <body>
@@ -19,7 +21,11 @@
         <h1>Nuestros Staff</h1>
         <div class="contenedor-medicos">
           <article class="flecha">
-            <img src="./assets/img/left.png" alt="imagen flecha" id="flecha-izquierda"/>
+            <img
+              src="./assets/img/left.png"
+              alt="imagen flecha"
+              id="flecha-izquierda"
+            />
           </article>
           <article class="medicos">
             <img src="./assets/img/medico.png" alt="fotomedico" />
@@ -50,7 +56,11 @@
             </p>
           </article>
           <article class="flecha">
-            <img src="./assets/img/right.png" alt="imagen flecha" id="flecha-derecha" />
+            <img
+              src="./assets/img/right.png"
+              alt="imagen flecha"
+              id="flecha-derecha"
+            />
           </article>
         </div>
       </section>
@@ -59,15 +69,10 @@
           <h2>Agregar Médico</h2>
           <form id="form-medico">
             <label for="nombre-medico">Nombre:</label>
-            <input type="text" id="nombre-medico" name="nombre" required />
+            <input type="text" id="nombre-medico" name="nombre" />
 
             <label for="especialidad-medico">Especialidad:</label>
-            <input
-              type="text"
-              id="especialidad-medico"
-              name="especialidad"
-              
-            />
+            <input type="text" id="especialidad-medico" name="especialidad" />
 
             <label for="horarios-medico">Horarios de Atención:</label>
             <input
@@ -75,7 +80,6 @@
               id="horarios-medico"
               name="horarios"
               placeholder="Ej: Lunes a Viernes de 9 a 13"
-              
             />
 
             <label for="foto-medico">Foto (URL):</label>
@@ -84,7 +88,8 @@
             <button type="submit" id="BtnAgregarMedico">Agregar Médico</button>
           </form>
         </div>
-    </section>
+      </section>
+    </main>
     <footer>
       <p>@ConsulltoriosLavalle2025</p>
     </footer>

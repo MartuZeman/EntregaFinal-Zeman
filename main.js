@@ -1,6 +1,5 @@
 //Variables
 
-
 let medicos = [
   {
     nombre: "Dr. Juan Pérez",
@@ -62,13 +61,13 @@ const imagenesMedicos = document.querySelectorAll("article.medicos img");
 const textoMedicos = document.querySelectorAll("article.medicos p");
 const flechaIzquierda = document.getElementById("flecha-derecha");
 const flechaDerecha = document.getElementById("flecha-izquierda");
-const btnAgregarMedico = document.getElementById("BtnAgregarMedico")
+const btnAgregarMedico = document.getElementById("BtnAgregarMedico");
 const formulario = document.querySelector(".formulario-medicos");
-const nombreMedico = document.getElementById("nombre-medico")
-const especialidadMedico = document.getElementById("especialidad-medico")
-const horariosMedico = document.getElementById("horarios-medico")
-const imgMedico = document.getElementById("foto-medico")
-const camposFormulario = document.querySelectorAll("#form-medico input")
+const nombreMedico = document.getElementById("nombre-medico");
+const especialidadMedico = document.getElementById("especialidad-medico");
+const horariosMedico = document.getElementById("horarios-medico");
+const imgMedico = document.getElementById("foto-medico");
+const camposFormulario = document.querySelectorAll("#form-medico input");
 
 const btnModoOscuro = document.getElementById("btnModoOscuro");
 const body = document.body;
@@ -118,72 +117,76 @@ flechaIzquierda.addEventListener("click", () => {
   actualizarCarrusel();
 });
 
-function guardarMedicos (){
-
-    localStorage.setItem("medicos", JSON.stringify(medicos));
+function guardarMedicos() {
+  localStorage.setItem("medicos", JSON.stringify(medicos));
 }
 
-function nuevoMedico(n,e,h,img)
-{
-
-    this.nombre = n;
-    this.especialidad = e;
-    this.horarios = h;
-    this.foto = img;
-
+function nuevoMedico(n, e, h, img) {
+  this.nombre = n;
+  this.especialidad = e;
+  this.horarios = h;
+  this.foto = img;
 }
 
-function limpiarCampos(campoFormulario){
-
-    campoFormulario.forEach((campos) => {
-        campos.value = ""
-    })
-
+function limpiarCampos(campoFormulario) {
+  campoFormulario.forEach((campos) => {
+    campos.value = "";
+  });
 }
 
-formulario.addEventListener("submit", (evt) =>{
-       evt.preventDefault(); 
-    if(nombreMedico.value === ""){
-        alert("Debe completar el nombre del medico")
-    }else if(especialidadMedico.value === "") {
-        alert("Debe completar la especialidad del medico")
-    }else if(horariosMedico.value === ""){
-        alert("Debe completar el horario del medico")
-    }else if(imgMedico.value === ""){
-        alert("Debe cargar la imagen del medico")
-    }else{ 
+formulario.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  if (nombreMedico.value === "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe completar el nombre del medico",
+    });
+  } else if (especialidadMedico.value === "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe completar la especialidad del medico",
+    });
+  } else if (horariosMedico.value === "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe completar el horario del medico",
+    });
+  } else if (imgMedico.value === "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe cargar la imagen del medico",
+    });
+  } else {
+    n = nombreMedico.value;
+    e = especialidadMedico.value;
+    h = horariosMedico.value;
+    img = imgMedico.value;
 
+    medicos.push(new nuevoMedico(n, e, h, img));
 
-    n = nombreMedico.value
-    e = especialidadMedico.value
-    h = horariosMedico.value
-    img = imgMedico.value
+    console.log(camposFormulario);
 
-    medicos.push(new nuevoMedico(n,e,h,img))
-
-    console.log(camposFormulario)
-
-    guardarMedicos()
-    actualizarCarrusel()
-    limpiarCampos(camposFormulario)
-    }
-
-})
+    guardarMedicos();
+    actualizarCarrusel();
+    limpiarCampos(camposFormulario);
+  }
+});
 
 //modo oscuro
 
 btnModoOscuro.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
 
- body.classList.toggle("dark-mode")
-
-   if (body.classList.contains("dark-mode")) {
+  if (body.classList.contains("dark-mode")) {
     localStorage.setItem("tema", "dark");
   } else {
     localStorage.setItem("tema", "light");
   }
-
-
-})
+});
 
 if (temaGuardado === "dark") {
   body.classList.add("dark-mode");
@@ -191,4 +194,3 @@ if (temaGuardado === "dark") {
   // Asegurarse de que no haya un modo oscuro residual si la preferencia es light
   body.classList.remove("dark-mode");
 }
-
