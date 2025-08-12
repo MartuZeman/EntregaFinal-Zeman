@@ -173,6 +173,14 @@ formulario.addEventListener("submit", (evt) => {
     guardarMedicos();
     actualizarCarrusel();
     limpiarCampos(camposFormulario);
+
+    Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Quedo guardado el nuevo medico",
+  showConfirmButton: false,
+  timer: 1500
+});
   }
 });
 
