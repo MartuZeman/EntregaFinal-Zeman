@@ -1,55 +1,5 @@
 //Variables
-
-let medicos = [
-  {
-    nombre: "Dr. Juan Pérez",
-    especialidad: "Cardiología",
-    horarios: "Lunes a Viernes 9-13",
-    foto: "assets/img/medico.png",
-  },
-  {
-    nombre: "Dra. María López",
-    especialidad: "Pediatría",
-    horarios: "Martes y Jueves 14-18",
-    foto: "assets/img/medica.png",
-  },
-  {
-    nombre: "Dr. Carlos Gómez",
-    especialidad: "Dermatología",
-    horarios: "Lunes, Miércoles y Viernes 10-15",
-    foto: "assets/img/medico1.png",
-  },
-  {
-    nombre: "Dra. Ana Torres",
-    especialidad: "Ginecología",
-    horarios: "Martes a Sábado 8-12",
-    foto: "assets/img/medica1.png",
-  },
-  {
-    nombre: "Dr. Luis Martínez",
-    especialidad: "Neurología",
-    horarios: "Lunes y Miércoles 9-14",
-    foto: "assets/img/medico2.png",
-  },
-  {
-    nombre: "Dra. Paula Fernández",
-    especialidad: "Odontología",
-    horarios: "Martes a Viernes 10-16",
-    foto: "assets/img/medica2.png",
-  },
-  {
-    nombre: "Dr. Ricardo Díaz",
-    especialidad: "Traumatología",
-    horarios: "Lunes a Viernes 8-12",
-    foto: "assets/img/medico3.png",
-  },
-  {
-    nombre: "Dra. Sofía García",
-    especialidad: "Oftalmología",
-    horarios: "Miércoles y Viernes 13-18",
-    foto: "assets/img/medica3.png",
-  },
-];
+let medicos = [];
 
 let indiceInicio = 0;
 let pacientes = [];
@@ -75,12 +25,6 @@ const temaGuardado = localStorage.getItem("tema");
 
 //Guardar medicos iniciales
 
-if (localStorage.getItem("medicos")) {
-  medicos = JSON.parse(localStorage.getItem("medicos"));
-} else {
-  localStorage.setItem("medicos", JSON.stringify(medicos));
-}
-
 //Carrusel funcion actualizar imagenes
 function actualizarCarrusel() {
   for (let i = 0; i < articulos.length; i += 1) {
@@ -96,8 +40,28 @@ function actualizarCarrusel() {
   }
 }
 
-//actualizacion inicial con los primeros medicos
-actualizarCarrusel();
+async function obtenerMedicos() {
+  try {
+    const respuesta = await fetch("data.json");
+
+    if (!respuesta.ok) {
+      throw new Error("Error en la respuesta de la petición al servidor");
+    }
+
+    if (localStorage.getItem("medicos")) {
+      medicos = JSON.parse(localStorage.getItem("medicos"));
+    } else {
+      medicos = await respuesta.json();
+      localStorage.setItem("medicos", JSON.stringify(medicos));
+    }
+
+    actualizarCarrusel(medicos);
+  } catch (error) {
+    console.error("Error fetching doctors:", error);
+  }
+}
+
+obtenerMedicos();
 
 //Eventos para mover el carrusel
 flechaDerecha.addEventListener("click", () => {
@@ -175,12 +139,12 @@ formulario.addEventListener("submit", (evt) => {
     limpiarCampos(camposFormulario);
 
     Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "Quedo guardado el nuevo medico",
-  showConfirmButton: false,
-  timer: 1500
-});
+      position: "top-end",
+      icon: "success",
+      title: "Quedo guardado el nuevo medico",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 });
 
